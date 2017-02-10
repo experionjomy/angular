@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="nameApp">
+<head>
+<meta charset="utf-8">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+   <script>
+    var nameApp = angular.module('nameApp', []);
+    nameApp.controller('NameCtrl',function($scope){
+   	$scope.names=["John","Jane","Jiss"]; 
+
+   	$scope.$watch('lastname',function(newValue,oldValue) {
+      console.log("new value is "+newValue);
+
+    });
+    $scope.addName=function(){
+
+      $scope.names.push($scope.enteredName);
+      $scope.enteredName="";
+    };
+    $scope.removeName=function(name){
+      var i=$scope.names.indexOf(name);
+      $scope.names.splice(i,1);
+    };
+   });
+
+   </script>
+	<title></title>
+</head>
+<body ng-controller='NameCtrl'>
+
+   
+<ul>
+  <li ng-repeat="name in names">{{name}}
+  <a href="" ng-click="removeName(name)">Remove</a></li>
+</ul>
+<form ng-submit='addName();'>
+  <input type="text" ng-model="enteredName">
+  <input type="submit" value="add">
+</body>
+</html>
